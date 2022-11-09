@@ -1,0 +1,42 @@
+.main-div{
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.half-div{
+    width: 50%;
+}
+
+.list{
+    justify-content: center;
+}
+
+.main-div ul {
+    padding-top: 0;
+    list-style: none;
+    display: flex;
+    /* flex-direction: row; */
+}
+
+.main-div li{
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.main-div li a{
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+.main-div li a:hover{
+    color: rgb(224, 177, 6);
+    text-decoration: underline;
+}
+
+.main-title{
+    font-size: 22px;
+    padding-left: 20px;
+    font-style: italic;
+}
