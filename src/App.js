@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import AllDishes from "./components/Dish/AllDishes";
 import Cart from "./components/Cart/Cart";
 import Axios from "axios";
+import AboutUs from "./components/About Us/AboutUs";
 
 // const allDishes = [
 // 	{
@@ -84,6 +85,11 @@ function App() {
 			<Route
 				path="/show-cart"
 				element={<Cart cart={cart} removeFromCart={removeFromCart} />}
+				exact
+			/>
+			<Route
+				path="/about-us"
+				element={<AboutUs />}
 				exact
 			/>
 		</Routes>

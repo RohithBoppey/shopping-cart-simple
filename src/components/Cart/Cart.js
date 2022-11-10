@@ -20,7 +20,7 @@ const Cart = (props) => {
 
 	const navigate = useNavigate();
 
-	const inputRef = useRef(new []());
+	const inputRef = useRef(new Array());
 
 	const calculateTotal = () => {
 		let t = 0;
@@ -28,7 +28,7 @@ const Cart = (props) => {
 			t += dish.price * dish.count;
 		});
 		setTotal(t);
-	}
+	};
 
 	useEffect(() => {
 		calculateTotal();
@@ -38,9 +38,11 @@ const Cart = (props) => {
 		setDishes((prevDishes) => {
 			const index = prevDishes.findIndex((obj) => id === obj.id);
 			// console.log(index);
-			console.log(inputRef)
+			// console.log(inputRef);
 			if (index !== -1) {
-				prevDishes[index].count = parseInt(inputRef.current[index].value);
+				prevDishes[index].count = parseInt(
+					inputRef.current[index].value
+				);
 				calculateTotal();
 				// console.log(prevDishes)
 			}
@@ -99,7 +101,11 @@ const Cart = (props) => {
 	};
 
 	const purchase = () => {
-		const text = `\n\nYour bill is: $${total}\nThank you for shopping with us!\nHoping to see you soon Customer.`;
+		const text = `\n\nYour bill is: $${total}\n\nYour items are: \n${dishes.map(
+			(dish) => {
+				return `${dish.name} - ${dish.count}` + `\n`;
+			}
+		)}\nThank you for shopping with us!\nHoping to see you soon Customer.`;
 		alert(text);
 	};
 
