@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Navbar from "../Navbar/Navbar";
 
 import "./Cart.css";
@@ -6,35 +6,57 @@ import "./Cart.css";
 import { useNavigate } from "react-router-dom";
 
 const Cart = (props) => {
-	console.log(props.cart);
+	// console.log(props.cart);
 
-	const [dishes, setDishes] = useState(props.cart);
+	let initialDishes = [];
+
+	props.cart.forEach((dish) => {
+		initialDishes.push({ ...dish, count: 1 });
+	});
+
+	const [dishes, setDishes] = useState(initialDishes);
 
 	const [total, setTotal] = useState(0);
 
 	const navigate = useNavigate();
 
-	useEffect(() => {
+	const inputRef = useRef(new []());
+
+	const calculateTotal = () => {
 		let t = 0;
 		dishes.forEach((dish) => {
-			t += dish.price;
+			t += dish.price * dish.count;
 		});
 		setTotal(t);
-	});
-
-	const changeHandler = () => {
-		
 	}
 
+	useEffect(() => {
+		calculateTotal();
+	});
+
+	const changeHandler = (id) => {
+		setDishes((prevDishes) => {
+			const index = prevDishes.findIndex((obj) => id === obj.id);
+			// console.log(index);
+			console.log(inputRef)
+			if (index !== -1) {
+				prevDishes[index].count = parseInt(inputRef.current[index].value);
+				calculateTotal();
+				// console.log(prevDishes)
+			}
+			return prevDishes;
+		});
+	};
+
 	const getDetails = (detail) => {
-		console.log(detail);
+		// console.log(detail);
 		return (
 			<div className="cart-items">
 				<div className="cart-row">
 					<div className="cart-item cart-column">
 						<span className="cart-item-title">
 							{" "}
-							{detail.name} &nbsp; &nbsp;
+							{detail.name} &nbsp;
 							<span
 								style={{ fontSize: 12, fontStyle: "oblique" }}>
 								({detail.id})
@@ -50,9 +72,10 @@ const Cart = (props) => {
 						<input
 							className="cart-quantity-input"
 							type="number"
-							defaultValue={1}
+							defaultValue={detail.count}
 							min={1}
-							onChange = {changeHandler}
+							onChange={() => changeHandler(detail.id)}
+							ref={(element) => inputRef.current.push(element)}
 						/>
 						<button
 							className="btn btn-danger"
@@ -119,7 +142,10 @@ const Cart = (props) => {
 				</>
 			) : (
 				<div className="middle">
-					<p>Maybe your cart is empty, add elements and visit here again.</p>
+					<p>
+						Maybe your cart is empty, add elements and visit here
+						again.
+					</p>
 				</div>
 			)}
 		</div>

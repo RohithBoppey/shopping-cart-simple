@@ -38,7 +38,9 @@ function App() {
 		const response = await Axios.get(
 			"https://ig-food-menus.herokuapp.com/best-foods"
 		);
-		response.data = response.data.slice(0, 20);
+		// adding first 20 entries
+		response.data = response.data.slice(25, 42);
+		// console.log(response.data);
 		setDishes(response.data);
 	};
 
@@ -71,7 +73,7 @@ function App() {
 			<Route
 				path="/all-dishes"
 				element={
-					dishes ? (
+					dishes.length !== 0 ? (
 						<AllDishes dishes={dishes} onAddToCart={addToCart} />
 					) : (
 						`Loading....`
