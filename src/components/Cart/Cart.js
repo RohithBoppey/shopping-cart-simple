@@ -20,7 +20,8 @@ const Cart = (props) => {
 
 	const navigate = useNavigate();
 
-	const inputRef = useRef(new []());
+	/*eslint-disable no-array-constructor*/
+	const inputRef = useRef(new Array());
 
 	const calculateTotal = () => {
 		let t = 0;

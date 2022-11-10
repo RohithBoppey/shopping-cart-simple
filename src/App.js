@@ -1,6 +1,5 @@
 import "./App.css";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import Home from "./components/Home";
 import { useState, useEffect } from "react";
 import AllDishes from "./components/Dish/AllDishes";
 import Cart from "./components/Cart/Cart";
@@ -70,7 +69,17 @@ function App() {
 
 	return (
 		<Routes>
-			<Route path="/" element={<Home />} exact />
+			<Route
+				path="/"
+				element={
+					dishes.length !== 0 ? (
+						<AllDishes dishes={dishes} onAddToCart={addToCart} />
+					) : (
+						`Loading....`
+					)
+				}
+				exact
+			/>
 			<Route
 				path="/all-dishes"
 				element={
@@ -87,11 +96,7 @@ function App() {
 				element={<Cart cart={cart} removeFromCart={removeFromCart} />}
 				exact
 			/>
-			<Route
-				path="/about-us"
-				element={<AboutUs />}
-				exact
-			/>
+			<Route path="/about-us" element={<AboutUs />} exact />
 		</Routes>
 	);
 }
