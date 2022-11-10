@@ -20,7 +20,7 @@ const Cart = (props) => {
 
 	const navigate = useNavigate();
 
-	const inputRef = useRef(new Array());
+	const inputRef = useRef(new []());
 
 	const calculateTotal = () => {
 		let t = 0;
@@ -103,7 +103,7 @@ const Cart = (props) => {
 	const purchase = () => {
 		const text = `\n\nYour bill is: $${total}\n\nYour items are: \n${dishes.map(
 			(dish) => {
-				return `${dish.name} - ${dish.count}` + `\n`;
+				return `${dish.name} - ${dish.count}\n`;
 			}
 		)}\nThank you for shopping with us!\nHoping to see you soon Customer.`;
 		alert(text);

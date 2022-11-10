@@ -11,7 +11,7 @@ const AboutUs = () => {
 		<Navbar />
 			<div className="main-div1">
 				<div className="first-half">
-					<img src={photo} alt="photo" />
+					<img src={photo} alt="rohith's" />
 				</div>
 
 				<div className="other-half">
