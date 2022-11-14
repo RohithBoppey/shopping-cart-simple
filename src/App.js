@@ -60,6 +60,10 @@ function App() {
 		});
 	};
 
+	const clearCart = () => {
+		setCart([]);
+	}
+
 	const removeFromCart = (dishId) => {
 		setCart((prevCart) => {
 			return prevCart.filter((dish) => dish.id !== dishId);
@@ -93,7 +97,7 @@ function App() {
 			/>
 			<Route
 				path="/show-cart"
-				element={<Cart cart={cart} removeFromCart={removeFromCart} />}
+				element={<Cart cart={cart} removeFromCart={removeFromCart} clearCart = {clearCart}/>}
 				exact
 			/>
 			<Route path="/about-us" element={<AboutUs />} exact />

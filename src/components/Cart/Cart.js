@@ -108,6 +108,8 @@ const Cart = (props) => {
 			}
 		)}\nThank you for shopping with us!\nHoping to see you soon Customer.`;
 		alert(text);
+		props.clearCart();
+		navigate('/show-cart');
 	};
 
 	return (
