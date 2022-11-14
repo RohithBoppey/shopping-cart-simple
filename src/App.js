@@ -5,6 +5,7 @@ import AllDishes from "./components/Dish/AllDishes";
 import Cart from "./components/Cart/Cart";
 import Axios from "axios";
 import AboutUs from "./components/About Us/AboutUs";
+import Bill from "./components/Billing Page/Bill";
 
 // const allDishes = [
 // 	{
@@ -31,6 +32,7 @@ import AboutUs from "./components/About Us/AboutUs";
 function App() {
 	const [dishes, setDishes] = useState([]);
 	const [cart, setCart] = useState([]);
+	const [finalDishes, setFinalDishes] = useState([]);
 
 	const navigate = useNavigate();
 
@@ -62,13 +64,17 @@ function App() {
 
 	const clearCart = () => {
 		setCart([]);
-	}
+	};
 
 	const removeFromCart = (dishId) => {
 		setCart((prevCart) => {
 			return prevCart.filter((dish) => dish.id !== dishId);
 		});
 		navigate("/show-cart");
+	};
+
+	const setFinalDishesHandler = (finalDishes) => {
+		setFinalDishes(finalDishes);
 	};
 
 	return (
@@ -97,9 +103,22 @@ function App() {
 			/>
 			<Route
 				path="/show-cart"
-				element={<Cart cart={cart} removeFromCart={removeFromCart} clearCart = {clearCart}/>}
+				element={
+					<Cart
+						cart={cart}
+						setFinalDishes={setFinalDishesHandler}
+						removeFromCart={removeFromCart}
+					/>
+				}
 				exact
 			/>
+
+			<Route
+				path="/billing-page"
+				element={<Bill dishes={finalDishes} clearCart={clearCart} />}
+				exact
+			/>
+
 			<Route path="/about-us" element={<AboutUs />} exact />
 		</Routes>
 	);
