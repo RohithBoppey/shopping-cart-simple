@@ -75,6 +75,7 @@ const Bill = (props) => {
 						type="text"
 						class="checkout-input address"
 						placeholder="Address"
+						ref={addressRef}
 					/>
 				</p>
 				<p>
@@ -83,7 +84,6 @@ const Bill = (props) => {
 						value="Purchase"
 						class="checkout-btn"
 						onClick={submitHandler}
-						ref={addressRef}
 					/>
 				</p>
 			</form>
